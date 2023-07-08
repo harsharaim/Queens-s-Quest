@@ -17,19 +17,25 @@ Ubuntu Terminal command to Execute the Project :  g++ main.cpp -o cg -lGL -lGLU 
 </pre> 
 # Results
 
-<img width="960" alt="image" src="https://github.com/harsharaim/Queens-s-Quest/assets/86067494/16d3e738-a162-49d5-92d3-21a9b9aff353">
-</br>
-<img width="960" alt="image" src="https://github.com/harsharaim/Queens-s-Quest/assets/86067494/b6477f59-f6f1-4b5c-8759-458fa29f6f74">
-</br>
-<img width="960" alt="image" src="https://github.com/harsharaim/Queens-s-Quest/assets/86067494/d05a4320-02bb-4143-bd70-ebf75054987e">
-</br>
-<img width="960" alt="image" src="https://github.com/harsharaim/Queens-s-Quest/assets/86067494/9281b806-b93d-4a79-ba82-9a9294d000d7">
-</br>
-<img width="960" alt="image" src="https://github.com/harsharaim/Queens-s-Quest/assets/86067494/09562ddb-591d-413c-bc86-dca78438a22d">
-</br></br>
-<img width="960" alt="image" src="https://github.com/harsharaim/Queens-s-Quest/assets/86067494/66988bed-5190-4a68-9eb0-28072f64f816">
-</br>
-<img width="960" alt="image" src="https://github.com/harsharaim/Queens-s-Quest/assets/86067494/b1ce7670-5b75-4f8c-ace6-a22ae4443ca3">
+<img width="500" alt="image" src="https://github.com/harsharaim/Queens-s-Quest/assets/86067494/16d3e738-a162-49d5-92d3-21a9b9aff353">
+<br>
+<br>
+<img width="500" alt="image" src="https://github.com/harsharaim/Queens-s-Quest/assets/86067494/b6477f59-f6f1-4b5c-8759-458fa29f6f74">
+<br>
+<br>
+<img width="500" alt="image" src="https://github.com/harsharaim/Queens-s-Quest/assets/86067494/d05a4320-02bb-4143-bd70-ebf75054987e">
+<br>
+<br>
+<img width="500" alt="image" src="https://github.com/harsharaim/Queens-s-Quest/assets/86067494/9281b806-b93d-4a79-ba82-9a9294d000d7">
+<br>
+<br>
+<img width="500" alt="image" src="https://github.com/harsharaim/Queens-s-Quest/assets/86067494/09562ddb-591d-413c-bc86-dca78438a22d">
+<br>
+<br>
+<img width="500" alt="image" src="https://github.com/harsharaim/Queens-s-Quest/assets/86067494/66988bed-5190-4a68-9eb0-28072f64f816">
+<br>
+<br>
+<img width="500" alt="image" src="https://github.com/harsharaim/Queens-s-Quest/assets/86067494/b1ce7670-5b75-4f8c-ace6-a22ae4443ca3">
 
 
 
