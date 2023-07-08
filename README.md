@@ -13,7 +13,7 @@ Vs Code Terminal command to Execute the Project :  cd bin
 </pre>          
 <pre>
 Ubuntu Terminal command to Execute the Project :  g++ main.cpp -o cg -lGL -lGLU -lglut                      
-                                                  ./cg 
+                                                  ./main 
 </pre> 
 # Results
 
