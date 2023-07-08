@@ -11,7 +11,10 @@ will display a valid solution for the current board configuration.
 Vs Code Terminal command to Execute the Project :  cd bin                      
                                                    mingw32-make 
 </pre>          
-
+<pre>
+Ubuntu Terminal command to Execute the Project :  g++ main.cpp -o cg -lGL -lGLU -lglut                      
+                                                  ./cg 
+</pre> 
 # Results
 
 <img width="960" alt="image" src="https://github.com/harsharaim/Queens-s-Quest/assets/86067494/16d3e738-a162-49d5-92d3-21a9b9aff353">
