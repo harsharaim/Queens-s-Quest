@@ -1,45 +1,41 @@
-#include<GL/freeglut_std.h>
 #include <GL/glut.h>
 #include<iostream>
 #include <cmath>
-
-#define _USE_MATH_DEFINES
-
 using namespace std;
 
-
-//Declaration of variables
+//--------------------Declaration of variables-----------------------------
 char chessboard[25][25] = {};
 int queens =4;
 float W;
 float H;
-int savingposition[25][2] = {};
+int savingposition[25][2] = {};//array to keep track of the valid positions
 int mouseX = 0;
 int mouseY = 0;
 bool mouseButton = false;
 int viewPage = 0;
-int gameSelected = 0;
 int queenCount=0;
 bool displayBlock = false;
 int displayTime = 5000;
+//------------------------------------------------------------------------
 
-//function to display text
+
+//-------------------function to display text-----------------------------
 void displayText(float x, float y, float z, const char* text) {
 	glRasterPos3f(x, y, z);
 	for (const char* c = text; *c != '\0'; c++) {
 		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *c);
 	}
 }
-
-//function to display large text
 void displayTitle(float x, float y, float z, const char* text) {
 	glRasterPos3f(x, y, z);
 	for (const char* c = text; *c != '\0'; c++) {
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *c);
 	}
 }
+//-----------------------------------------------------------------------
 
-// starting information page
+
+//-------------------starting information page---------------------------
 void info_page(){
     glClearColor(0.1, 0.1, 0.1, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -53,39 +49,33 @@ void info_page(){
 	glEnd();
 	glColor3f(1.0, 0.6, 0.2);
 	displayText(-380, 700, 0.0, "SAHYADRI COLLEGE OF ENGINEERING & MANAGEMENT");
-
 	glColor3f(1.0, 1.0, 1.0);
 	displayText(-405, 610, 0.0, "DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING");
-
 	glColor3f(1.0, 1.0, 1.0);
 	displayText(-175, 500, 0.0, "A MINI PROJECT TITLED ");
-
 	glColor3f(0.0, 1.0, 0.0);
 	displayTitle(-150, 350, 0.0, "QUEEN'S QUEST");
-
 	glColor3f(1.0, 0.6, 0.2);
 	displayText(-75, 230, 0.0, "created by");
-
 	glColor3f(1.0, 1.0, 1.0);
 	displayText(-550, 0, 0.0, "Harsha Kumar Rai M");
-	displayText(-550, -85, 0.0, "(**********)");
+	displayText(-550, -85, 0.0, "(*********)");
 	displayText(350, 0, 0.0, "Jaideep D Naik");
-	displayText(350, -85, 0.0, "(**********)");
-
+	displayText(350, -85, 0.0, "(*********)");
 	glColor3f(1.0, 0.6, 0.2);
 	displayText(-150, -300, 0.0, "Under the Guidance of");
 	glColor3f(1.0, 1.0, 1.0);
-	displayText(-110, -380, 0.0, "Prof.**********");
-
+	displayText(-110, -380, 0.0, "Prof.************");
 	glColor3f(1.0, 0.6, 0.2);
 	displayText(-180, -500, 0.0, "Academic Year 2022-2023");
 	glColor3f(1.0, 1.0, 1.0);
 	displayText(-350, -650, 0.0, "Press ENTER to start the game. Press ESC to close.");
-
 	glFlush();
 }
+//-------------------------------------------------------------------------
 
-// Game start menu page
+
+//---------------------Game start menu page--------------------------------
 void start_page()
 {
 	glLineWidth(20);
@@ -96,11 +86,9 @@ void start_page()
 		glVertex2f(1000 ,1000);
 		glVertex2f(1000 ,-1000);
 	glEnd();
-
     glColor3f(1,0.5,0);
 	displayTitle(-150,600,0,"QUEEN'S QUEST");
 	glLineWidth(1);
-
     //start game button
 	glColor3f(0,1,0);
 	glBegin(GL_POLYGON);
@@ -117,7 +105,6 @@ void start_page()
 			mouseButton = false;
 		}
 	}
-
     //instruction button
 	glColor3f(0,1,0);
 	glBegin(GL_POLYGON);
@@ -134,7 +121,6 @@ void start_page()
 			mouseButton = false;
 		}
 	}
-
     // go back button
 	glColor3f(0,1,0);
 	glBegin(GL_POLYGON);
@@ -151,7 +137,6 @@ void start_page()
 			mouseButton = false;
 		}
 	}
-
 	// quit button
     glColor3f(1, 0, 0);
 	glBegin(GL_POLYGON);
@@ -169,8 +154,10 @@ void start_page()
 		}
 	}
 }
+//------------------------------------------------------------------------
 
-// instruction page
+
+//----------------------Algorithm page------------------------------------
 void instruction_page(){
     glClearColor(0.1, 0.1, 0.1, 1.0);
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -182,10 +169,8 @@ void instruction_page(){
 		glVertex2f(1000 ,1000);
 		glVertex2f(1000 ,-1000);
 	glEnd();
-
 	glColor3f(1,0.5,0);
 	displayTitle(-280,800,0,"QUEEN'S QUEST ALGORITHM");
-
     // back button
     glColor3f(0,0,0);
     glBegin(GL_POLYGON);
@@ -202,8 +187,7 @@ void instruction_page(){
 			mouseButton = false;
 		}
 	}
-
-    // instructions
+    // Algorithms
 	glColor3f(0,1,0);
     displayTitle(-940,600,0,"The N Queen is the problem of placing N chess queens on an NxN chessboard so that no two queens attack each other");
 	displayTitle(-940,500,0,"It can be seen that for n =1, the problem has a trivial solution, and no solution exists for n =2 and n =3. ");
@@ -218,79 +202,30 @@ void instruction_page(){
 	displayText(-940,-500,0,"Step 6 - If it is not possible to place a queen in the current column without violating the rules of the problem, backtrack to the previous column.");
 	displayText(-940,-600,0,"Step 7 - Remove the queen from the previous column and move it down one row.");
 	displayText(-940,-700,0,"Step 8 - Repeat steps 4-7 until all possible configurations have been tried.");
-
 }
+//-----------------------------------------------------------------------------
 
 
-
-bool checking(int row, int column){
-    for (int i = 0; i < queens; i++){
-        for (int j = 0; j < queens; j++){
-            if ((j + i == column + row || column - row == j - i || i == row || j == column) && chessboard[i][j] == 'Q')
-                return false;
-        }
-    }
-    return true;
-}
-
-void removeflag(int row){
-    for (int i = 0; i < queens; i++){
-        chessboard[row][i] = '0';
-    }
-}
-
-
-//function to get the solution for the problem using backtracking
-void backtracking(void){
-    for (int row = 0; row < queens; row++){
-        for (int column = 0; column < queens; column++){
-            if (checking(row, column) && chessboard[row][column] != '-'){
-                chessboard[row][column] = 'Q';
-                removeflag(row + 1);
-                savingposition[row][0] = row;
-                savingposition[row][1] = column;
-                row++;
-                column = -1;
-                if (row == queens)
-                    break;
-            }
-            else if (column == queens - 1 && chessboard[row][column] != 'Q'){
-                row--;
-                column = savingposition[row][1];
-                chessboard[row][column] = '-';
-                column = 0;
-            }
-        }
-    }
-}
-
-// function to draw the shape of the queen
-
-
+//--------------------------function to draw the shape of the queen------------
 void drawQueenCrown() {
-    // Set crown color
     glColor3f(0.0, 0.0, 0.0);
-
     // Draw the base of the crown
     glBegin(GL_QUADS);
-    glVertex2f(-0.4, -0.3); // Modified y-coordinate
+    glVertex2f(-0.4, -0.3);
     glVertex2f(-0.3, 0.0);
     glVertex2f(0.3, 0.0);
-    glVertex2f(0.4, -0.3); // Modified y-coordinate
+    glVertex2f(0.4, -0.3);
     glEnd();
-
     // Draw the triangles projecting from the base
     glBegin(GL_TRIANGLES);
     glVertex2f(-0.36, 0.0);
     glVertex2f(0.0, 0.4);
     glVertex2f(0.36, 0.0);
     glEnd();
-
     // Draw circles at the end of each triangle
     const float radius = 0.07;
     const int numSegments = 30;
-    const float angleIncrement = 2.0 * 6 / numSegments;
-
+    const float angleIncrement = 2.0 * 3.14 / numSegments;
     glBegin(GL_TRIANGLE_FAN);
     glVertex2f(-0.36, 0.0);
     for (int i = 0; i <= numSegments; ++i) {
@@ -300,7 +235,6 @@ void drawQueenCrown() {
         glVertex2f(x, y);
     }
     glEnd();
-
     glBegin(GL_TRIANGLE_FAN);
     glVertex2f(0.0, 0.4);
     for (int i = 0; i <= numSegments; ++i) {
@@ -310,7 +244,6 @@ void drawQueenCrown() {
         glVertex2f(x, y);
     }
     glEnd();
-
     glBegin(GL_TRIANGLE_FAN);
     glVertex2f(0.36, 0.0);
     for (int i = 0; i <= numSegments; ++i) {
@@ -321,10 +254,10 @@ void drawQueenCrown() {
     }
     glEnd();
 }
+//---------------------------------------------------------------------------------
 
 
-
-//function to display the chess board
+//---------------------function to display the chess board and queens---------------
 void displayboard(){
     glTranslatef(25, H - 25, 0.0);
     glPushMatrix();
@@ -352,7 +285,58 @@ void displayboard(){
     }
     glPopMatrix();
 }
+//--------------------------------------------------------------------------------------------
 
+
+//---------checking the validity of placing a queen at a given position------------------------
+bool checking(int row, int column){
+    for (int i = 0; i < queens; i++){
+        for (int j = 0; j < queens; j++){
+            if ((j + i == column + row || column - row == j - i || i == row || j == column) && chessboard[i][j] == 'Q')
+                return false;
+        }
+    }
+    return true;
+}
+//----------------------------------------------------------------------------------------------
+
+
+//------------clear any previously marked valid positions in the (next) row---------------------
+void removeflag(int row){
+    for (int i = 0; i < queens; i++){
+        chessboard[row][i] = '0';
+    }
+}
+//----------------------------------------------------------------------------------------------
+
+
+//----------------------function to get the solution for the problem using backtracking---------
+void backtracking(void){
+    for (int row = 0; row < queens; row++){
+        for (int column = 0; column < queens; column++){
+            if (checking(row, column) && chessboard[row][column] != '-'){
+                chessboard[row][column] = 'Q';
+                removeflag(row + 1);
+                savingposition[row][0] = row;
+                savingposition[row][1] = column;
+                row++;
+                column = -1;
+                if (row == queens)
+                    break;
+            }
+            else if (column == queens - 1 && chessboard[row][column] != 'Q'){
+                row--;
+                column = savingposition[row][1];
+                chessboard[row][column] = '-';
+                column = 0;
+            }
+        }
+    }
+}
+//-----------------------------------------------------------------------------------------------
+
+
+//---------------------------function to perform refresh board action----------------------------
 void removeQueen(){
    for(int i=0;i<queens;i++){
     for(int j=0;j<queens;j++){
@@ -361,8 +345,10 @@ void removeQueen(){
     }
    }
 }
+//------------------------------------------------------------------------------------------------
 
-//function to display the game page
+
+//------------------------function to display the game page---------------------------------------
 void display_game()
 {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -404,10 +390,7 @@ void display_game()
 			mouseButton = false;
 		}
 	}
-
-
-
-    //next button
+    //level down
     glColor3f(0,1,0);
 	glBegin(GL_POLYGON);
 		glVertex2f(850, 275);
@@ -418,7 +401,7 @@ void display_game()
 	glColor3f(0,0,0);
 	displayTitle(930, 245, 0.0, "Level Down(Press s)");
 
-    //next button
+    //level up
     glColor3f(0,1,0);
 	glBegin(GL_POLYGON);
 		glVertex2f(850, 350);
@@ -429,7 +412,7 @@ void display_game()
 	glColor3f(0,0,0);
 	displayTitle(940, 320, 0.0, "Level Up(Press w)");
 
-    //Let Me Solve button
+    //refresh board
     glColor3f(0,1,0);
 	glBegin(GL_POLYGON);
 		glVertex2f(850, 375);
@@ -454,31 +437,23 @@ void display_game()
     displayboard();
     glutSwapBuffers();
 }
+//------------------------------------------------------------------------------
 
+
+//------------------adjusts the view port size of game--------------------------
 void reshape1(int w, int h){
     glViewport(0, 0, w, h);
     W = w;
     H = h;
 }
+//------------------------------------------------------------------------------
 
-//mouse click function
+
+//------------------------mouse click function of game page---------------------
 void mouse(int button, int state, int x, int y) {
-    if(mouseX>=850 && mouseX<=1200 && mouseY>=150 && mouseY<=200){
-     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-        mouseX = x * 2000 / glutGet(GLUT_WINDOW_WIDTH) - 1000;
-        mouseY = -y * 2000 / glutGet(GLUT_WINDOW_HEIGHT) + 1000;
-        mouseButton = true;
-    }
-    else {
-        mouseButton = false;
-    }
-    glutPostRedisplay();
-    }
-
     int row, column;
     if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
     {
-
         row = queens - (y / 50) - 1;
         row=queens-row-1;
         column = x / 50;
@@ -504,7 +479,10 @@ void mouse(int button, int state, int x, int y) {
     }
     glutPostRedisplay();
 }
+//-----------------------------------------------------------------------------
 
+
+//---------------------Mouse click function of main page-----------------------
 void mouseClick(int buttonPressed, int state, int x, int y) {
     if (buttonPressed == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
         mouseX = x * 2000 / glutGet(GLUT_WINDOW_WIDTH) - 1000;
@@ -516,8 +494,10 @@ void mouseClick(int buttonPressed, int state, int x, int y) {
     }
     glutPostRedisplay();
 }
+//-----------------------------------------------------------------------------
 
-// Keyboard click function
+
+//-------------------Keyboard click function of main page----------------------
 void keyboard(unsigned char key, int x, int y){
     if (key == 13) {
         if (viewPage == 0) {
@@ -531,7 +511,10 @@ void keyboard(unsigned char key, int x, int y){
         }
     }
 }
+//-----------------------------------------------------------------------------
 
+
+//-----------------Keyboard click function of main page------------------------
 void keyboard1(unsigned char key, int x, int y){
     if (key ==27) {
             exit(0);
@@ -558,10 +541,11 @@ void keyboard1(unsigned char key, int x, int y){
       backtracking();
       glutPostRedisplay();
     }
-
 }
+//-----------------------------------------------------------------------------
 
 
+//-----------------------------adjusts the view port size of main page---------
 void reshape(int width, int height) {
 	glViewport(0, 0, width, height);
 	glMatrixMode(GL_PROJECTION);
@@ -569,7 +553,10 @@ void reshape(int width, int height) {
 	glOrtho(-1000, 1000, -1000, 1000, -1, 1);
 	glMatrixMode(GL_MODELVIEW);
 }
+//-----------------------------------------------------------------------------
 
+
+//---------------------game function-----------------------------------
 void game(){
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutCreateWindow("Queen's Quest");
@@ -580,8 +567,10 @@ void game(){
     glutReshapeFunc(reshape1);
     glutMainLoop();
 }
+//-----------------------------------------------------------------------------
 
-// main display function
+
+//-------------------main display function-------------------------------------
 void display() {
    glClear(GL_COLOR_BUFFER_BIT);
 
@@ -594,15 +583,13 @@ void display() {
    }else if(viewPage==3){
       game();
    }
-
 	glFlush();
 	glutSwapBuffers();
 }
+//-----------------------------------------------------------------------------
 
 
-
-
-// main function
+//------------------------------main function----------------------------------
 int main(int argc, char** argv) {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
@@ -617,3 +604,4 @@ int main(int argc, char** argv) {
 	glutMainLoop();
 	//return 0;
 }
+//------------------------------------------------------------------------------
